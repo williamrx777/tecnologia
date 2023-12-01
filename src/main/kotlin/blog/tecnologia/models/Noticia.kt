@@ -1,5 +1,6 @@
 package blog.tecnologia.models
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -18,6 +19,7 @@ data class Noticia(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id:Long,
     val nome:String,
+    @Column(columnDefinition = "Text")
     val descricao:String,
     val publicacao: LocalDateTime
 )
