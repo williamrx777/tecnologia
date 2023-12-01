@@ -1,8 +1,14 @@
-FROM maven:3.8.5-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests
+FROM gradle:4.7.0-jdk8-alpine AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build --no-daemon
 
-FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/tecnologia-0.0.1-SNAPSHOT.jar tecnologia.jar
+FROM openjdk:8-jre-slim
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","tecnologia.jar"]
+
+RUN mkdir /app
+
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/TecnologiaApplication.jar
+
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/TecnologiaApplication.jar"]
