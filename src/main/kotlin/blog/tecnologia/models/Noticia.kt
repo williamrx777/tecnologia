@@ -12,14 +12,15 @@ import java.time.LocalDateTime
 
 
 @Entity
-@Table(name = "noticias")
+@Table(name = "noticia")
 @Data
 data class Noticia(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id:Long,
+    @Column(length = 255)
     val nome:String,
-    @Column(columnDefinition = "Text")
+    @Column(columnDefinition = "TEXT")
     val descricao:String,
     val publicacao: LocalDateTime
 )
