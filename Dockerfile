@@ -11,4 +11,4 @@ RUN mkdir /blog
 
 COPY --from=build /home/gradle/src/build/libs/*.jar /blog/tecnologia.jar
 
-ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/blog/tecnologia.jar"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom","-jar","/blog/tecnologia.jar"]
