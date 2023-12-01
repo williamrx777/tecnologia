@@ -22,5 +22,7 @@ data class Noticia(
     val nome:String,
     @Column(columnDefinition = "TEXT")
     val descricao:String,
-    val publicacao: LocalDateTime
+    val publicacao: LocalDateTime,
+    @Column(columnDefinition = "TEXT")
+    val imagem:String
 )
